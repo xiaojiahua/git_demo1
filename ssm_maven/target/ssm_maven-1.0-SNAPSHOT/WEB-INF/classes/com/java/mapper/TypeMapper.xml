@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.java.mapper.BookMapper" >
+    <select id="selectBookListByTypyId" resultType="com.java.pojo.Book" parameterType="Long">
+        SELECT sb.* FROM ssm_book sb INNER  JOIN ssm_book_type sbt ON sb.type_id=sbt.type_id
+         <if test="_parameter!=0">
+             WHERE sbt.type_id=#{0}
+         </if>
+    </select>
+    <insert id="insertBook" parameterType="com.java.pojo.Book">
+        insert into ssm_book values(null,#{book_name},#{book_detail},#{book_publisher},#{book_pub_time},#{type_id})
+    </insert>
+</mapper>
